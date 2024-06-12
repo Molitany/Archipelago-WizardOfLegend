@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Any, Dict, Mapping
 from BaseClasses import Item, ItemClassification, Location, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.generic.Rules import set_rule
@@ -87,6 +87,8 @@ class WizardOfLegendWorld(World):
     def create_event(self, event: str):
         return WizardOfLegendItem(event, ItemClassification.progression_skip_balancing, None, self.player)
 
+    def fill_slot_data(self) -> Mapping[str, Any]:
+        return self.options.as_dict("death_link", casing="camel")
 
 class WizardOfLegendItem(Item):
     game: str = "Wizard of Legend"
